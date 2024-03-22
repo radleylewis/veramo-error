@@ -1,8 +1,8 @@
-import * as u8a from 'uint8arrays';
+import * as u8a from "uint8arrays";
 import { SigningKey } from "ethers";
-import { x25519 } from "@noble/curves/ed25519";
+import { x25519 } from "ed25519";
 import { bytesToHex, concat, hexToBytes } from "@veramo/utils";
-// Core interfaces
+
 import {
   createAgent,
   IDIDManager,
@@ -114,17 +114,14 @@ async function main() {
   );
 
   const did = buildDid(secpKey);
-  const didIdentifier = await agent.didManagerImport({
+  await agent.didManagerImport({
     did,
     provider: SEPOLIA_TESTNET_PROVIDER,
     controllerKeyId: secpKey.kid ?? `tspn-owner-key`,
     keys: [secpKey],
   });
 
-  const xKey = generateX25519KeyPair(
-    "didcomm-enc-key",
-    process.env.DIDCOMM_PRIVATE_KEY!,
-  );
+  const xKey = generateX25519KeyPair("didcomm-enc-key");
 
   const isIKey = (key: MinimalImportableKey | IKey): key is IKey => {
     if (!key.privateKeyHex) return false;
@@ -137,7 +134,7 @@ async function main() {
 
   console.log("Public DID Doc: ", JSON.stringify(publicDidDoc, null, 2));
 
-  if (isIKey(xKey)) throw new Error("xKey is not an IKey");
+  if (!isIKey(xKey)) throw new Error("xKey is not an IKey");
   console.log("ADDING X25519 KEY", xKey);
   await agent.didManagerAddKey({ did, key: xKey });
 
@@ -214,3 +211,5 @@ function secp256FromPrivateKey(
     },
   };
 }
+
+main();
