@@ -16,9 +16,9 @@ import {
   IKey,
 } from "@veramo/core";
 
-import { DIDManager } from "@veramo/did-manager";
+import { DIDManager, MemoryDIDStore } from "@veramo/did-manager";
 import { EthrDIDProvider } from "@veramo/did-provider-ethr";
-import { KeyManager } from "@veramo/key-manager";
+import { KeyManager, MemoryKeyStore } from "@veramo/key-manager";
 import { KeyManagementSystem, SecretBox } from "@veramo/kms-local";
 import { CredentialPlugin } from "@veramo/credential-w3c";
 import { DIDResolverPlugin } from "@veramo/did-resolver";
@@ -68,6 +68,11 @@ export const agent = createAgent<
   plugins: [
     new KeyManager({
       store: new KeyStore(dbConnection),
+      /**
+       * NOTE: the above (KeyStore) does not return the added key in the local didDoc,
+       * but the MemoryKeyStore does.
+       **/
+      // store: new MemoryKeyStore(),
       kms: {
         local: new KeyManagementSystem(
           new PrivateKeyStore(dbConnection, new SecretBox(KMS_SECRET_KEY)),
@@ -76,6 +81,10 @@ export const agent = createAgent<
     }),
     new DIDManager({
       store: new DIDStore(dbConnection),
+      /**
+       * NOTE: the above (DIDStore) does not return the added key in the local didDoc,
+       * but the MemoryDIDStore does. This is a bug in the DIDStore implementation.
+       **/
       // store: new MemoryDIDStore(),
       defaultProvider: SEPOLIA_TESTNET_PROVIDER,
       providers: {
