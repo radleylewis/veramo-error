@@ -2,6 +2,7 @@ import * as u8a from "uint8arrays";
 import { SigningKey } from "ethers";
 import { x25519 } from "@noble/curves/ed25519";
 import { bytesToHex, concat, hexToBytes } from "@veramo/utils";
+import dotenv from "dotenv";
 
 import {
   createAgent,
@@ -33,6 +34,8 @@ import {
 } from "@veramo/data-store";
 
 import { DataSource } from "typeorm";
+
+dotenv.config();
 
 // This will be the name for the local sqlite database for demo purposes
 const DATABASE_FILE = "database.sqlite";
