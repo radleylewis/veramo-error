@@ -1,6 +1,6 @@
 import * as u8a from "uint8arrays";
 import { SigningKey } from "ethers";
-import { x25519 } from "ed25519";
+import { x25519 } from "@noble/curves/ed25519";
 import { bytesToHex, concat, hexToBytes } from "@veramo/utils";
 
 import {
