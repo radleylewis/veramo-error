@@ -1,0 +1,35 @@
+{
+  "name": "veramo-error",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@veramo/core": "^5.6.0",
+    "@veramo/credential-w3c": "^5.6.0",
+    "@veramo/data-store": "^5.6.0",
+    "@veramo/did-manager": "^5.6.0",
+    "@veramo/did-provider-ethr": "^5.6.0",
+    "@veramo/did-resolver": "^5.6.0",
+    "@veramo/key-manager": "^5.6.0",
+    "@veramo/kms-local": "^5.6.0",
+    "@veramo/utils": "^5.6.0",
+    "add": "^2.0.6",
+    "did-resolver": "^4.1.0",
+    "ed25519": "link:@noble/curves/ed25519",
+    "ethers": "^6.11.1",
+    "ethr-did-resolver": "^10.1.5",
+    "sqlite3": "^5.1.7",
+    "ts-node": "^10.9.2",
+    "typeorm": "^0.3.20",
+    "typescript": "^5.4.3",
+    "uint8arrays": "^5.0.3",
+    "web-did-resolver": "^2.0.27"
+  }
+}
